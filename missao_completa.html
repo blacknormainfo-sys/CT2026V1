@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Missão Completa — Controlo Total</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#090909;--bg2:#0f0f0f;--card:#141414;--ac:#c8a84e;--ad:#8a7235;--tx:#e8e4dc;--t2:#94918b;--mu:#5a5855;--dg:#8b2020;--ol:#4a5a2b;--st:#2a2d30;--green:#6b8a3a;--blue:#3a6aaa;--orange:#aa7a3a;--red:#aa3a3a;--radius:6px;--font-head:'Oswald',sans-serif;--font-mono:'JetBrains Mono',monospace;--font-body:'Source Serif 4',Georgia,serif}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:var(--font-body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.container{max-width:780px;margin:0 auto;padding:32px 20px}
+h1{font-family:var(--font-head);font-size:clamp(28px,5vw,40px);font-weight:700;letter-spacing:4px;color:var(--ac);text-transform:uppercase;line-height:1.1;margin-bottom:4px}
+.subtitle{font-family:var(--font-head);font-size:clamp(14px,2.5vw,18px);font-weight:300;letter-spacing:3px;color:var(--t2);text-transform:uppercase;margin-bottom:24px}
+h2{font-family:var(--font-head);font-size:clamp(16px,3vw,20px);font-weight:600;letter-spacing:3px;color:var(--ac);text-transform:uppercase;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid rgba(200,168,78,0.15)}
+p{color:var(--t2);margin-bottom:12px}
+p b,p strong{color:var(--tx)}
+.tag{font-family:var(--font-mono);font-size:10px;letter-spacing:4px;color:var(--dg);text-transform:uppercase;margin-bottom:8px}
+.stamp{display:inline-block;border:2px solid var(--dg);color:var(--dg);font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:5px;padding:3px 12px;transform:rotate(-4deg);margin-bottom:16px}
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:2px;margin:20px 0;border-radius:var(--radius);overflow:hidden}
+.meta-item{background:var(--bg2);padding:12px 16px}
+.meta-label{font-family:var(--font-mono);font-size:9px;letter-spacing:2px;color:var(--ad);text-transform:uppercase;margin-bottom:2px}
+.meta-value{font-size:14px;color:var(--tx);font-weight:600}
+.charade{background:linear-gradient(135deg,#12100e,#18150f);border:1px solid var(--ad);border-radius:var(--radius);padding:24px;margin:20px 0}
+.charade-title{font-family:var(--font-mono);font-size:9px;letter-spacing:3px;color:var(--ac);text-transform:uppercase;margin-bottom:20px}
+.charade-item{display:flex;gap:16px;margin-bottom:16px;align-items:flex-start}
+.charade-item:last-child{margin-bottom:0}
+.charade-num{font-family:var(--font-head);font-size:18px;font-weight:700;color:var(--ad);min-width:28px;line-height:1.4}
+.charade-text{font-size:15px;color:var(--t2);line-height:1.6}
+.charade-text em{color:var(--ac);font-style:italic}
+.charade-text b{color:var(--tx)}
+.cp{display:flex;margin:6px 0;border-radius:var(--radius);overflow:hidden}
+.cp-num{min-width:48px;background:var(--ol);color:var(--bg);font-family:var(--font-head);font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.cp-num.red{background:var(--dg);color:var(--tx)}
+.cp-body{flex:1;background:var(--card);padding:12px 18px}
+.cp-text{font-size:14px;color:var(--t2);line-height:1.45;margin-bottom:0}
+.cp-text b{color:var(--tx)}
+.cp-time{font-family:var(--font-mono);font-size:11px;color:var(--ac);letter-spacing:1px;margin-top:4px}
+.warning{background:rgba(139,32,32,0.08);border:1px solid rgba(139,32,32,0.2);border-left:4px solid var(--dg);border-radius:0 var(--radius) var(--radius) 0;padding:14px 18px;margin:20px 0;font-family:var(--font-mono);font-size:12px;color:var(--dg);line-height:1.6}
+.sig{margin-top:24px;padding-top:12px;border-top:1px solid var(--st)}
+.sig-name{font-family:var(--font-head);font-size:16px;font-weight:700;letter-spacing:3px;color:var(--tx);text-transform:uppercase}
+.sig-role{font-family:var(--font-mono);font-size:9px;color:var(--ad);letter-spacing:2px;margin-top:2px}
+.radio-msg{display:flex;gap:12px;margin:16px 0;padding-bottom:16px;border-bottom:1px solid var(--st);align-items:flex-start}
+.radio-msg:last-of-type{border-bottom:none}
+.radio-cp{font-family:var(--font-head);font-size:16px;font-weight:700;color:var(--ol);min-width:40px;padding-top:4px}
+.radio-text{flex:1;background:var(--card);padding:14px 18px;border-left:3px solid var(--ac);border-radius:0 var(--radius) var(--radius) 0;font-family:var(--font-mono);font-size:12px;color:var(--tx);line-height:1.6}
+.code-box{text-align:center;padding:32px 24px;background:var(--bg2);border:2px solid var(--st);border-radius:var(--radius);margin:24px 0;position:relative}
+.code-box::before,.code-box::after{content:'';position:absolute;width:16px;height:16px}
+.code-box::before{top:-2px;left:-2px;border-top:3px solid var(--ac);border-left:3px solid var(--ac);border-radius:4px 0 0 0}
+.code-box::after{bottom:-2px;right:-2px;border-bottom:3px solid var(--ac);border-right:3px solid var(--ac);border-radius:0 0 4px 0}
+.code-value{font-family:var(--font-mono);font-size:clamp(28px,6vw,48px);font-weight:700;letter-spacing:6px;color:var(--ac);margin:12px 0;text-shadow:0 0 40px rgba(200,168,78,0.15)}
+.back{display:inline-block;margin-bottom:20px;padding:8px 16px;background:var(--card);color:var(--t2);text-decoration:none;border-radius:var(--radius);font-family:var(--font-mono);font-size:12px;border:1px solid var(--st);transition:all 0.2s}
+.back:hover{color:var(--ac);border-color:var(--ad)}
+footer{text-align:center;padding:32px 20px;margin-top:20px;border-top:1px solid var(--st);font-family:var(--font-mono);font-size:10px;color:var(--st);letter-spacing:2px}
+@media(max-width:640px){.cp{flex-direction:column}.cp-num{min-width:unset;padding:8px}.radio-msg{flex-direction:column}.radio-cp{min-width:unset}}
+
+.roles-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px;margin:16px 0;border-radius:var(--radius);overflow:hidden}
+.role{background:var(--card);padding:16px 20px}
+.role-name{font-family:var(--font-head);font-size:14px;font-weight:600;color:var(--ac);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.role-desc{font-size:14px;color:var(--t2);line-height:1.5}.role-desc b{color:var(--tx)}
+.box{background:var(--card);border:1px solid var(--st);border-radius:var(--radius);padding:20px 24px;margin:16px 0}
+.box h4{font-family:var(--font-head);font-size:16px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.box p{font-size:14px}.box.danger{border-color:rgba(139,32,32,0.3)}
+.fuel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin:12px 0;border-radius:var(--radius);overflow:hidden}
+.fuel-item{background:var(--bg2);padding:10px 14px}
+.fuel-label{font-family:var(--font-mono);font-size:8px;letter-spacing:2px;color:var(--ad);text-transform:uppercase;margin-bottom:2px}
+.fuel-value{font-size:14px;color:var(--tx);font-weight:700}
+.pen-table{width:100%;border-collapse:collapse;margin:12px 0}
+.pen-table td{padding:8px 12px;border-bottom:1px solid var(--st);font-size:14px}
+.pen-table td:first-child{color:var(--dg);font-weight:700;width:50%}
+.pen-table td:last-child{color:var(--t2)}
+.tl-item{display:flex;gap:16px;padding:14px 0;border-bottom:1px solid var(--st)}.tl-item:last-child{border-bottom:none}
+.tl-time{font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--ac);min-width:56px;padding-top:2px}
+.tl-content h5{font-family:var(--font-head);font-size:14px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--tx);margin-bottom:6px}
+.tl-content p{font-size:13px;margin-bottom:4px}
+.script{background:var(--bg2);border-left:3px solid var(--ac);border-radius:0 var(--radius) var(--radius) 0;padding:10px 16px;margin:8px 0;font-style:italic;font-size:13px;color:var(--tx);line-height:1.55}
+.mat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px;margin:12px 0;border-radius:var(--radius);overflow:hidden}
+.mat-item{background:var(--card);padding:10px 16px;border-left:3px solid var(--ad);font-size:13px;color:var(--t2)}.mat-item b{color:var(--tx);display:block;margin-bottom:2px}
+.fac-note{background:rgba(74,90,43,0.06);border:1px solid rgba(74,90,43,0.2);border-radius:var(--radius);padding:16px 20px;margin:16px 0}
+.fac-note h5{font-family:var(--font-head);font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#4a5a2b;margin-bottom:8px}
+.fac-note p{font-size:13px;margin-bottom:4px}
+.banner{padding:20px 24px;margin:32px 0 20px;border-radius:var(--radius);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.banner.green{background:#111d09;border:1px solid #4a5a2b;border-left:5px solid #6b8a3a}
+.banner.blue{background:#091120;border:1px solid #2a4a7a;border-left:5px solid #3a6aaa}
+.banner.red{background:#200909;border:1px solid #6a2222;border-left:5px solid #aa3a3a}
+.b-tag{font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase}
+.banner.green .b-tag{color:#6b8a3a}.banner.blue .b-tag{color:#3a6aaa}.banner.red .b-tag{color:#aa3a3a}
+.b-right{font-family:var(--font-head);font-size:18px;font-weight:700;letter-spacing:3px;text-transform:uppercase}
+.banner.green .b-right{color:#8bba4a}.banner.blue .b-right{color:#5a9ada}.banner.red .b-right{color:#da5a5a}
+.b-info{font-size:12px;color:var(--t2);margin-top:4px}.b-info b{color:var(--tx)}
+.divider{border:none;border-top:2px solid var(--st);margin:40px 0}
+@media(max-width:640px){.fuel-grid{grid-template-columns:1fr}.tl-item{flex-direction:column;gap:4px}.banner{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="index.html" class="back">← Voltar ao site</a>
+
+<div class="banner green"><div><div class="b-tag">📦 Entregar no CP1</div><div class="b-info"><b>Envelope selado</b> → Toda a equipa</div></div><div class="b-right">Carta de Missão</div></div>
+<div class="stamp">CONFIDENCIAL</div>
+<div class="tag">▲ ORDEM DE OPERAÇÕES CT-2026/04-D1 · APAGÃO GLOBAL ▲</div>
+<h1>Operação: Controlo Total</h1>
+<div class="subtitle">Dia 1 — Navegação, Resiliência e Evacuação</div>
+<div class="meta-grid"><div class="meta-item"><div class="meta-label">Data</div><div class="meta-value">17 ABR 2026</div></div><div class="meta-item"><div class="meta-label">Briefing</div><div class="meta-value">17:30H</div></div><div class="meta-item"><div class="meta-label">Limite</div><div class="meta-value">19:15H</div></div><div class="meta-item"><div class="meta-label">Efetivo</div><div class="meta-value">8–10 Oper.</div></div><div class="meta-item"><div class="meta-label">Partida</div><div class="meta-value">U.C.R. Chamboeira</div></div><div class="meta-item"><div class="meta-label">Objetivo</div><div class="meta-value">Base Sniper</div></div><div class="meta-item"><div class="meta-label">Indicativo</div><div class="meta-value">ALPHA-ONE</div></div><div class="meta-item"><div class="meta-label">Checkpoints</div><div class="meta-value">5</div></div></div>
+<h2>Situação — Apagão Global</h2>
+<p>Às 17:00h, um <b>apagão eletromagnético</b> atingiu a região. Rede colapsou. Telemóveis, GPS, relógios — tudo morreu. A <b>Base Sniper</b> mantém um gerador mas o <b>combustível está quase no fim</b>. A vossa missão: levar o combustível. A pé. Sem tecnologia.</p>
+<div class="charade"><div class="charade-title">Charada Operacional</div><div class="charade-item"><div class="charade-num">I</div><div class="charade-text">O mundo apagou-se. Do lugar onde <em>a cultura se une e recria</em>, olhem para onde o sol desce. Sigam onde <em>a água corre em pedra antiga</em> — o chafariz é o primeiro marco.</div></div><div class="charade-item"><div class="charade-num">II</div><div class="charade-text">Quando encontrarem <em>o palco circular onde a música dorme</em> — parem. O código abre a porta seguinte. <b>Recitem-no. Transmitam via rádio. Recebam a carga.</b></div></div><div class="charade-item"><div class="charade-num">III</div><div class="charade-text">Do palco, SUDESTE. O terreno desce — <em>como o mundo desceu quando as luzes se apagaram.</em> Atravessem a ponte. Na <em>bifurcação do reflexo</em> — escolham a direita.</div></div><div class="charade-item"><div class="charade-num">IV</div><div class="charade-text">Pela <em>Estrada do Casalinho</em>, o alcatrão morre e o terreno começa. Carreguem o combustível — <b>porque é a última esperança da base.</b> A 500m do objetivo, o imprevisto bate à porta.</div></div><div class="charade-item"><div class="charade-num">V</div><div class="charade-text"><em>Nenhum homem fica para trás.</em> Se um cai, a equipa carrega-o. <b>Nunca abandonam a missão nem quem faz parte dela.</b></div></div></div>
+<h2>Checkpoints</h2>
+<div class="cp"><div class="cp-num">CP1</div><div class="cp-body"><p class="cp-text"><b>U.C.R. Chamboeira</b> — Briefing. Recolha. Funções. Código (15s).</p><div class="cp-time">17:30 BRIEFING · 17:40 PARTIDA</div></div></div><div class="cp"><div class="cp-num">CP2</div><div class="cp-body"><p class="cp-text"><b>Coreto</b> — Código. Rádio. Distribuição jerricãs.</p><div class="cp-time">JANELA: 17:50–18:00</div></div></div><div class="cp"><div class="cp-num">CP3</div><div class="cp-body"><p class="cp-text"><b>Bifurcação do Espelho</b> — Orientação. Decisão de rota.</p><div class="cp-time">JANELA: 18:15–18:30</div></div></div><div class="cp"><div class="cp-num red">CP4</div><div class="cp-body"><p class="cp-text"><b>Ponto de Evacuação</b> — Situação imprevista. Últimos 500m.</p><div class="cp-time">JANELA: 18:35–18:50</div></div></div><div class="cp"><div class="cp-num red">CP5</div><div class="cp-body"><p class="cp-text"><b>Base Sniper</b> — Verificação. Rádio final. Debrief.</p><div class="cp-time">JANELA: 18:50–19:05 · LIMITE: 19:15</div></div></div>
+<div class="warning">⚠ Sem dispositivos. 1 relógio (cronometrista). Jerricãs NUNCA no chão. Ninguém fica para trás. 19:15 = missão falhada.</div>
+<div class="sig"><div class="sig-name">Miguel Delgado</div><div class="sig-role">COMANDANTE DE OPERAÇÃO · CONTROLO TOTAL 2026</div></div>
+
+<hr class="divider">
+<div class="banner blue"><div><div class="b-tag">📦 Entregar no CP2</div><div class="b-info"><b>Folha protocolo</b> → Transmissões</div></div><div class="b-right">Protocolo Rádio</div></div>
+<h1>Protocolo Rádio</h1>
+<div class="subtitle">ALPHA-ONE / CONTROLO</div>
+<p><b>Formato:</b> «CONTROLO, aqui ALPHA-ONE. [Mensagem]. Câmbio.»</p>
+<div class="radio-msg"><div class="radio-cp">CP2</div><div class="radio-text">«CONTROLO, aqui ALPHA-ONE. Checkpoint dois alcançado. [Comunicar Código]. Carga recebida — dois jerricãs de combustível. Equipa completa, [nº] elementos. Prosseguimos para checkpoint três. Câmbio.»</div></div>
+<div class="radio-msg"><div class="radio-cp">CP3</div><div class="radio-text">«CONTROLO, aqui ALPHA-ONE. Checkpoint três alcançado. Bifurcação identificada — rota confirmada, [indicar se esquerda ou direita]. Carga intacta. [Nº] elementos. Prosseguimos para checkpoint quatro. Câmbio.»</div></div>
+<div class="radio-msg"><div class="radio-cp">CP4</div><div class="radio-text">«CONTROLO, aqui ALPHA-ONE. Checkpoint quatro alcançado. ALERTA MÉDICO. Iniciamos evacuação para a base. Dois jerricãs intactos. Necessitamos assistência médica no CP5. Hora estimada: [hora]. Câmbio.»</div></div>
+<div class="radio-msg"><div class="radio-cp">CP5</div><div class="radio-text">«CONTROLO, aqui ALPHA-ONE. Base Sniper alcançada. Hora: [hora]. Missão concluída. Dois jerricãs entregues — carga [intacta/comprometida]. Ferido entregue. Equipa completa. Câmbio final.»</div></div>
+
+<hr class="divider">
+<div class="banner red"><div><div class="b-tag">🔒 Não Entregar</div><div class="b-info"><b>Código · Combustível · Evacuação · Penalizações</b></div></div><div class="b-right">Facilitador</div></div>
+<h1>Materiais do Facilitador</h1>
+<div class="code-box"><div style="font-family:var(--font-mono);font-size:10px;letter-spacing:4px;color:var(--dg);text-transform:uppercase">Código — 16 Caracteres · NATO</div><div class="code-value">4D-KILO-BRAVO-72-FX</div><div style="font-family:var(--font-mono);font-size:11px;color:var(--dg);letter-spacing:3px">◼ 15 SEG ◼ RECOLHER ◼ NÃO REPETIR ◼</div><div style="font-size:12px;color:var(--mu);margin-top:8px;font-style:italic">Pronúncia: <b style="color:var(--ac)">Quatro-Delta — Kilo — Bravo — Sete-Dois — Foxtrot-X-ray</b></div></div>
+<div class="box"><h4 style="color:#4a5a2b">Jerricãs de Combustível</h4><div class="fuel-grid"><div class="fuel-item"><div class="fuel-label">Equipamento</div><div class="fuel-value">2 × 10L</div></div><div class="fuel-item"><div class="fuel-label">Estado</div><div class="fuel-value">SELADOS · CHEIOS</div></div><div class="fuel-item"><div class="fuel-label">Regra</div><div class="fuel-value">NÃO TOCAM NO CHÃO</div></div></div><p>Selados. À mão. <b>Nunca tocam no chão — nem para trocar.</b> Equipa decide rotação. CP5: cheios e selados.</p></div>
+<div class="box danger"><h4 style="color:var(--dg)">Evacuação · CP4 → CP5</h4><p><b>CP4:</b> Informar Médico — 1 elemento sofreu <b>fratura grave</b>. Não pode caminhar.</p><p>Ferido <b>não toca no chão</b> nos ~500m finais. <b>Jerricãs continuam em mãos.</b></p><p><b>Quem é o ferido?</b> Quem carregava jerricãs — obriga reorganização total.</p></div>
+<h2>Penalizações</h2>
+<table class="pen-table"><tr><td>Código errado</td><td>20 burpees + 2 min</td></tr><tr><td>Jerricã no chão</td><td>30 agachamentos coletivos</td></tr><tr><td>Ferido no chão</td><td>Equipa recua 50m</td></tr><tr><td>Rádio incompleto</td><td>Repetir (consome tempo)</td></tr><tr><td>Membro para trás</td><td>Equipa regressa</td></tr><tr><td>Fora da janela</td><td>+1 tarefa física</td></tr><tr><td>19:15 ultrapassado</td><td>Missão FALHADA</td></tr></table>
+
+<hr class="divider">
+<div class="banner red"><div><div class="b-tag">🔒 Não Entregar</div><div class="b-info"><b>Timeline · Scripts · Variantes</b></div></div><div class="b-right">Timeline</div></div>
+<h1>Timeline + Scripts</h1>
+<div class="subtitle">17:15 → 19:25</div>
+<h2>Material</h2>
+<div class="mat-grid"><div class="mat-item"><b>Carta missão</b>Envelope selado</div><div class="mat-item"><b>Cartão código A4</b>4D-KILO-BRAVO-72-FX</div><div class="mat-item"><b>2 jerricãs 10L</b>Selados, cheios</div><div class="mat-item"><b>2 rádios</b>1 equipa + 1 facilitador</div><div class="mat-item"><b>Saco + relógio</b>Telemóveis/relógios</div><div class="mat-item"><b>Folha rádio</b>→ Transmissões CP2</div><div class="mat-item"><b>Mapa</b>Decisão Cmd.</div><div class="mat-item"><b>Kit 1ºs socorros</b>Obrigatório</div></div>
+<h2>Timeline</h2>
+<div class="tl-item"><div class="tl-time">17:15</div><div class="tl-content"><h5>Preparação</h5><p>Jerricãs. Facilitador aux. CP4. Rádios. Saco.</p></div></div>
+<div class="tl-item"><div class="tl-time">17:30</div><div class="tl-content"><h5>Briefing · CP1</h5><p>Reunir. Recolher <b>telemóveis e relógios</b>.</p><div class="script">«Às 17:00h um apagão atingiu a região. Telemóveis morreram. Entreguem tudo. Apenas um terá relógio — o TL decide quem.»</div><p><b>4 funções</b> (60s). Envelope. 2 min leitura. Código 15s. Rádio. Partida.</p><div class="script">«Um código. 16 caracteres. 15 segundos. Uma oportunidade. Olhos no cartão. Agora.»</div></div></div>
+<div class="tl-item"><div class="tl-time">17:50</div><div class="tl-content"><h5>CP2 — Coreto</h5><div class="script">«Paragem. O código. Transmissões — rádio ligado. Equipa — recitem. Agora.»</div><p><b>OK:</b> Jerricãs + folha rádio. Mapa opcional. 1ª transmissão. <b>Erro:</b> 20 burpees + 2min. Máx.3.</p></div></div>
+<div class="tl-item"><div class="tl-time">18:20</div><div class="tl-content"><h5>CP3 — Bifurcação</h5><div class="script">«Bifurcação. A carta tem a resposta. Orientador — decisão. TL — confirmação. 60 segundos.»</div><p>2ª transmissão. Rota errada: 200m antes de alertar.</p></div></div>
+<div class="tl-item"><div class="tl-time">18:40</div><div class="tl-content"><h5>CP4 — Evacuação</h5><p>Facilitador aux. presente. 3ª transmissão.</p><div class="script">«ALERTA MÉDICO. [Nome] sofreu fratura. Médico — avalia. TL — decide transporte. Jerricãs convosco. Base a 500m.»</div></div></div>
+<div class="tl-item"><div class="tl-time">18:55</div><div class="tl-content"><h5>CP5 — Base Sniper</h5><p>Verificar jerricãs. Receber ferido. 4ª transmissão.</p><div class="script">«Missão concluída. O combustível mantém a base viva. O companheiro que carregaram — não o largaram. Liderança.»</div></div></div>
+<div class="tl-item"><div class="tl-time">19:05</div><div class="tl-content"><h5>Debrief (~20 min)</h5><p>→ TL: Decisão mais difícil? → Transmissões: Pressão? → Orientador: Charada? → Médico: Instinto?<br>→ Quem liderou? → Redistribuição? → Código? → Apagão real — preparados? <b>Devolver telemóveis.</b></p></div></div>
+<div class="warning">⚠ 19:15 = limite. Facilitador vai ao encontro. Segurança real > simulação.</div>
+<div class="fac-note"><h5>Variantes</h5><p><b>Fácil:</b> 20s código. Mapa no CP1. Ferido só 200m.</p><p><b>Difícil:</b> 10s código. Sem mapa. Ferido = mais pesado. Vendados no CP3. 75 min.</p><p><b>Noturna:</b> Início 19:30. 1 lanterna. CP4→CP5 no escuro.</p></div>
+</div>
+<footer>OPERAÇÃO CONTROLO TOTAL · MIGUEL DELGADO · 17 ABR 2026</footer>
+</body>
+</html>

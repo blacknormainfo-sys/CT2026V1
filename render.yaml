@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: controlo-total
+    runtime: static
+    staticPublishPath: ./public
+    buildCommand: ""
+    envVars:
+      - key: SKIP_INSTALL_DEPS
+        value: "true"
+    headers:
+      - path: /**
+        name: X-Frame-Options
+        value: SAMEORIGIN
+      - path: /**
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /missao_dia1.pdf
+        name: Content-Disposition
+        value: inline; filename="missao_controlo_total_dia1.pdf"
+      - path: /**/*.html
+        name: Cache-Control
+        value: no-cache
+      - path: /**/*.pdf
+        name: Cache-Control
+        value: public, max-age=86400
+    routes:
+      - type: rewrite
+        source: /
+        destination: /index.html
